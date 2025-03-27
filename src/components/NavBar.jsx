@@ -8,6 +8,7 @@ const Navbar = () => {
     { name: 'Education', path: '#education' },
     { name: 'Projects', path: '/Projects' },
     { name: 'Skills', path: '/Skills' },
+    { name: 'Chat With AI', path: '/chatbot' },
     { name: 'Contact', path: '/contact' },
   ];
 
