@@ -23,7 +23,7 @@ const Hero = () => {
           <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 mb-4 justify-center md:justify-start">
             {/* Hire Me Button */}
             <a
-              href="#contact"
+              href="mailto:gauravgupta0954@gmail.com?subject=Hello%20Gaurav"
               className="flex items-center bg-[#0284C7] hover:bg-[#0369A1] text-white px-4 py-2 rounded transition text-xs md:text-sm"
               style={{borderRadius:"20px"}}
             >
@@ -32,7 +32,7 @@ const Hero = () => {
             </a>
             {/* Download CV Button */}
             <a
-              href="/cv.pdf"
+              href="/CV.pdf"
               download
               className="flex items-center border border-[#0284C7] text-[#0284C7] hover:bg-[#0284C7] hover:text-white px-4 py-2 rounded transition text-xs md:text-sm"
               style={{borderRadius:"20px"}}
@@ -42,13 +42,13 @@ const Hero = () => {
           </div>
           {/* Social Icons */}
           <div className="flex justify-center md:justify-start space-x-4">
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/gaurav-kumar-25554430b/" target="_blank" rel="noopener noreferrer">
               <img src="/linkedin.svg" alt="LinkedIn" className="w-5 h-5" />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Gaurav-k-Gupta" target="_blank" rel="noopener noreferrer">
               <img src="/github.svg" alt="GitHub" className="w-5 h-5" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/gupta.gaaurav/" target="_blank" rel="noopener noreferrer">
               <img src="/instagram.svg" alt="Instagram" className="w-5 h-5" />
             </a>
           </div>

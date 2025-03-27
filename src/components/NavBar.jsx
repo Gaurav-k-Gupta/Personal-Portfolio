@@ -74,14 +74,16 @@ const Navbar = ({ onEducationClick, onSkillsClick , onContactClick , onProjectsC
           </div>
           {/* Right: Desktop "Let's Talk" Button */}
           <div className="hidden md:flex">
-            <Link
-              to="/contact"
+            <a
+              href="https://wa.me/919153693102?text=Hi%20Gaurav,%20I%20would%20like%20to%20talk%20about..."
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center bg-[#0284C7] hover:bg-[#0369A1] text-white px-4 py-2 rounded"
               style={{ borderRadius: "20px" }}
             >
               <FaWhatsapp className="mr-2" />
               Let's Talk
-            </Link>
+            </a>
           </div>
           {/* Mobile: Hamburger Menu Button */}
           <div className="md:hidden flex items-center">
@@ -139,15 +141,17 @@ const Navbar = ({ onEducationClick, onSkillsClick , onContactClick , onProjectsC
             )}
           </div>
           <div className="px-4 pb-3">
-            <Link
-              to="/contact"
+            <a
+              href="https://wa.me/919153693102?text=Hi%20Gaurav,%20I%20would%20like%20to%20talk%20about..."
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center bg-[#0284C7] hover:bg-[#0369A1] text-white px-4 py-2 rounded"
               style={{ borderRadius: "20px" }}
             >
               <FaWhatsapp className="mr-2" />
               Let's Talk
-            </Link>
+            </a>
           </div>
         </div>
       )}

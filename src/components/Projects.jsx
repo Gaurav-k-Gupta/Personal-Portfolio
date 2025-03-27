@@ -3,32 +3,51 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
   {
-    title: "Project One",
-    description: "A modern web application that demonstrates innovative features and sleek design.",
-    technologies: ["React", "Tailwind CSS", "Node.js"],
-    github: "https://github.com/yourusername/project-one",
-    live: "https://project-one-demo.com"
+    title: "HostelPro - Hostel Management System",
+    description:
+      "Developed a web app for hostel management with room booking and availability tracking. Implemented a complaint system for issue reporting and resolution, and built a secure backend with authentication along with a responsive UI.",
+    technologies: ["React Js", "Node Js", "Tailwind CSS"],
+    github: "https://github.com/OmAnand857/Hostel_Management",
+    live: "https://hostel-management-roan.vercel.app/"
   },
   {
-    title: "Project Two",
-    description: "A mobile-friendly solution built with progressive technologies for improved UX.",
-    technologies: ["Next.js", "Firebase", "Sass"],
-    github: "https://github.com/yourusername/project-two",
-    live: "https://project-two-demo.com"
+    title: "VaultRoom - Password Manager Web App",
+    description:
+      "Built a secure password manager with a secured login system and OAuth authentication. Developed RESTful APIs for user-specific credential management and designed a responsive UI with React.js and TailwindCSS. Implemented industry-standard encryption for data security.",
+    technologies: ["React Js", "Express Js", "MongoDB"],
+    github: "https://github.com/Gaurav-k-Gupta/VaultRoom---password-Manager"
+    // No live demo provided
   },
   {
-    title: "Project Three",
-    description: "An innovative approach to solving real-world problems with machine learning and data visualization.",
-    technologies: ["Python", "TensorFlow", "Matplotlib"],
-    github: "https://github.com/yourusername/project-three",
-    live: "https://project-three-demo.com"
+    title: "VIKASA App - C4GT",
+    description:
+      "An open-source PWA aimed to ease data collection for VIKASA by working offline in no-internet areas. Implemented a queue management system using IndexedDB and data synchronization using service workers. Built a responsive UI for a seamless experience.",
+    technologies: ["React Js", "TypeScript", "Fastify", "IndexedDB"],
+    github: "https://github.com/Gaurav-k-Gupta/vikasa-form-app"
+    // No live demo provided
   },
   {
-    title: "Project Three",
-    description: "An innovative approach to solving real-world problems with machine learning and data visualization.",
-    technologies: ["Python", "TensorFlow", "Matplotlib"],
-    github: "https://github.com/yourusername/project-three",
-    live: "https://project-three-demo.com"
+    title: "Stress Management App",
+    description:
+      "Developed an end-to-end stress management app with self-assessment and personalized recommendations. Integrated chat assistance, music/video therapies, and guided meditation.",
+    technologies: ["React Native", "TypeScript"],
+    // No github or live demo provided
+  },
+  {
+    title: "100 Days of Machine Learning",
+    description:
+      "A comprehensive journey documenting 100 days of learning and projects in Machine Learning. Explores a range of ML topics, from data preprocessing to model evaluation.",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "numpy", "pandas-profiling"],
+    github: "https://github.com/Gaurav-k-Gupta/100-Days-of-Machine-Learning/tree/main"
+    // No live demo provided
+  },
+  {
+    title: "TrusToken Starter",
+    description:
+      "Developed a secure communication and document signing app which uses a custom trust token to detect the device security.",
+    technologies: ["kotlin", "xml"],
+    github: "https://github.com/Rahulrajln1111/Secure_TrusToken/tree/patchII"
+    // No live demo provided
   }
 ];
 
@@ -65,22 +84,26 @@ const Projects = forwardRef((props, ref) => {
                   </ul>
                 </div>
                 <div className="flex space-x-4">
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors duration-300"
-                  >
-                    <FaGithub className="mr-2" /> GitHub
-                  </a>
-                  <a 
-                    href={project.live} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex items-center bg-[#0284C7] hover:bg-[#0369A1] text-white px-4 py-2 rounded transition-colors duration-300"
-                  >
-                    <FaExternalLinkAlt className="mr-2" /> Live Demo
-                  </a>
+                  {project.github && (
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors duration-300"
+                    >
+                      <FaGithub className="mr-2" /> GitHub
+                    </a>
+                  )}
+                  {project.live && (
+                    <a 
+                      href={project.live} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex items-center bg-[#0284C7] hover:bg-[#0369A1] text-white px-4 py-2 rounded transition-colors duration-300"
+                    >
+                      <FaExternalLinkAlt className="mr-2" /> Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

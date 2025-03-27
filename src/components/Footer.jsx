@@ -21,10 +21,10 @@ const Footer = () => {
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
               <FaTwitter size={24} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+            <a href="https://www.instagram.com/gupta.gaaurav/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
               <FaInstagram size={24} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+            <a href="https://www.linkedin.com/in/gaurav-kumar-25554430b/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
               <FaLinkedin size={24} />
             </a>
           </div>

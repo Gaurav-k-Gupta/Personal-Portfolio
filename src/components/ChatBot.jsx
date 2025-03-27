@@ -64,6 +64,56 @@ Skills :-
     description: "From solving POTDs to giving contests, i have solved problems mostly on DP , Graphs and focusing on optimization.",
   },
 
+
+  Gaurav's projects details :-
+  {
+    title: "HostelPro - Hostel Management System",
+    description:
+      "Developed a web app for hostel management with room booking and availability tracking. Implemented a complaint system for issue reporting and resolution, and built a secure backend with authentication along with a responsive UI.",
+    technologies: ["React Js", "Node Js", "Tailwind CSS"],
+    github: "https://github.com/OmAnand857/Hostel_Management",
+    live: "https://hostel-management-roan.vercel.app/"
+  },
+  {
+    title: "VaultRoom - Password Manager Web App",
+    description:
+      "Built a secure password manager with a secured login system and OAuth authentication. Developed RESTful APIs for user-specific credential management and designed a responsive UI with React.js and TailwindCSS. Implemented industry-standard encryption for data security.",
+    technologies: ["React Js", "Express Js", "MongoDB"],
+    github: "https://github.com/Gaurav-k-Gupta/VaultRoom---password-Manager"
+    // No live demo provided
+  },
+  {
+    title: "VIKASA App - C4GT",
+    description:
+      "An open-source PWA aimed to ease data collection for VIKASA by working offline in no-internet areas. Implemented a queue management system using IndexedDB and data synchronization using service workers. Built a responsive UI for a seamless experience.",
+    technologies: ["React Js", "TypeScript", "Fastify", "IndexedDB"],
+    github: "https://github.com/Gaurav-k-Gupta/vikasa-form-app"
+    // No live demo provided
+  },
+  {
+    title: "Stress Management App",
+    description:
+      "Developed an end-to-end stress management app with self-assessment and personalized recommendations. Integrated chat assistance, music/video therapies, and guided meditation.",
+    technologies: ["React Native", "TypeScript"],
+    // No github or live demo provided
+  },
+  {
+    title: "100 Days of Machine Learning",
+    description:
+      "A comprehensive journey documenting 100 days of learning and projects in Machine Learning. Explores a range of ML topics, from data preprocessing to model evaluation.",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "numpy", "pandas-profiling"],
+    github: "https://github.com/Gaurav-k-Gupta/100-Days-of-Machine-Learning/tree/main"
+    // No live demo provided
+  },
+  {
+    title: "TrusToken Starter",
+    description:
+      "Developed a secure communication and document signing app which uses a custom trust token to detect the device security.",
+    technologies: ["kotlin", "xml"],
+    github: "https://github.com/Rahulrajln1111/Secure_TrusToken/tree/patchII"
+    // No live demo provided
+  }
+
   `,
 };
 
