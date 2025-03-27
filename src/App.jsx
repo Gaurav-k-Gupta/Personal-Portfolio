@@ -1,31 +1,93 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import About from './components/About';
-import Footer from './components/Footer';
+import EducationSection from './components/Education';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Achievements from './components/Achievements';
+import Contact from './components/Contact';
 import Chatbot from './components/ChatBot';
-// Example page components; you can replace these with your own implementations
-const Home = () => <div className="p-4">Home Page</div>;
-// const About = () => <div className="p-4">About Page</div>;
-const Projects = () => <div className="p-4">Projects Page</div>;
-const Contact = () => <div className="p-4">Contact Page</div>;
+import Footer from './components/Footer';
+
+// Render home page content: About + all sections.
+const MainContent = ({ educationRef, skillsRef, projectsRef, achievementsRef, contactRef }) => {
+  const location = useLocation();
+
+  return (
+    <div className="pt-16">
+      <Routes>
+        <Route path="/" element={<About />} />
+        <Route path="/chatbot" element={<Chatbot />} />
+      </Routes>
+      {location.pathname === "/" && (
+        <>
+          <EducationSection ref={educationRef} />
+          <Skills ref={skillsRef} />
+          <Projects ref={projectsRef} />
+          <Achievements ref={achievementsRef} />
+          <Contact ref={contactRef} />
+        </>
+      )}
+    </div>
+  );
+};
 
 function App() {
+  const educationRef = useRef(null);
+  const skillsRef = useRef(null);
+  const projectsRef = useRef(null);
+  const achievementsRef = useRef(null);
+  const contactRef = useRef(null);
+
+  const scrollToEducation = () => {
+    if (educationRef.current) {
+      educationRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToSkills = () => {
+    if (skillsRef.current) {
+      skillsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToProjects = () => {
+    if (projectsRef.current) {
+      projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToAchievements = () => {
+    if (achievementsRef.current) {
+      achievementsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToContact = () => {
+    if (contactRef.current) {
+      contactRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Router>
       <div className="min-h-screen">
-        <Navbar />
-        {/* Padding top added to avoid content being hidden behind fixed navbar */}
-        <div className="pt-16">
-          <Routes>
-            <Route path="/" element={<About />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/chatbot" element={<Chatbot />} />
-          </Routes>
-        </div>
-        <Footer/>
+        <Navbar 
+          onEducationClick={scrollToEducation} 
+          onSkillsClick={scrollToSkills} 
+          onProjectsClick={scrollToProjects}
+          onAchievementsClick={scrollToAchievements}
+          onContactClick={scrollToContact}
+        />
+        <MainContent 
+          educationRef={educationRef} 
+          skillsRef={skillsRef} 
+          projectsRef={projectsRef}
+          achievementsRef={achievementsRef}
+          contactRef={contactRef}
+        />
+        <Footer />
       </div>
     </Router>
   );

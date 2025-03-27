@@ -1,5 +1,6 @@
 import React from 'react';
 import EducationSection from './Education';
+import Skills from './Skills';
 const Hero = () => {
   return (
     <section className="relative bg-white">
@@ -64,7 +65,8 @@ const Hero = () => {
         </svg>
       </div>
 
-        <EducationSection/>
+        {/* <EducationSection/> */}
+        {/* <Skills/> */}
     </section>
   );
 };

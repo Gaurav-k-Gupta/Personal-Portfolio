@@ -1,16 +1,62 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const Navbar = () => {
+const Navbar = ({ onEducationClick, onSkillsClick , onContactClick , onProjectsClick , onAchievementsClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const menuOptions = [
-    { name: 'Education', path: '#education' },
-    { name: 'Projects', path: '/Projects' },
-    { name: 'Skills', path: '/Skills' },
+    { name: 'Education', path: '#education', onClick: onEducationClick },
+    { name: 'Projects', path: '#Projects' , onClick : onProjectsClick },
+    { name: 'Skills', path: '#skills', onClick: onSkillsClick },
     { name: 'Chat With AI', path: '/chatbot' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Achievements', path: '#achievements' , onClick : onAchievementsClick },
+    { name: 'Contact', path: '#contact' , onClick : onContactClick },
   ];
+
+  const handleHashOptionClick = (option) => {
+    // For options like Education or Skills:
+    if (location.pathname !== "/") {
+      // Navigate to home page
+      navigate("/");
+      // Wait a bit for the new page to load and then scroll to the section.
+      setTimeout(() => {
+        if (option.onClick) option.onClick();
+      }, 300);
+    } else {
+      if (option.onClick) option.onClick();
+    }
+  };
+
+  // Function to render each menu option.
+  const renderMenuOption = (option) => {
+    if (option.path.startsWith("#")) {
+      return (
+        <button
+          key={option.name}
+          onClick={() => {
+            handleHashOptionClick(option);
+            setMobileMenuOpen(false);
+          }}
+          className="text-gray-600 hover:text-gray-900"
+        >
+          {option.name}
+        </button>
+      );
+    }
+    return (
+      <Link
+        key={option.name}
+        to={option.path}
+        onClick={() => setMobileMenuOpen(false)}
+        className="text-gray-600 hover:text-gray-900"
+      >
+        {option.name}
+      </Link>
+    );
+  };
 
   return (
     <nav className="bg-white fixed w-full z-10">
@@ -24,40 +70,7 @@ const Navbar = () => {
           </div>
           {/* Center: Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            {menuOptions.map((option) =>
-              option.path.startsWith("#") ? (
-                option.name === "Education" ? (
-                  <a
-                    key={option.name}
-                    href="javascript:void(0)"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.href = window.location.origin + "#education";
-                    }}
-                    className="text-gray-600 hover:text-gray-900"
-                  >
-                    {option.name}
-                  </a>
-                ) : (
-                  <a
-                    key={option.name}
-                    href={option.path}
-                    className="text-gray-600 hover:text-gray-900"
-                  >
-                    {option.name}
-                  </a>
-                )
-              ) : (
-                <Link
-                  key={option.name}
-                  to={option.path}
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  {option.name}
-                </Link>
-              )
-            )}
-
+            {menuOptions.map(renderMenuOption)}
           </div>
           {/* Right: Desktop "Let's Talk" Button */}
           <div className="hidden md:flex">
@@ -72,7 +85,10 @@ const Navbar = () => {
           </div>
           {/* Mobile: Hamburger Menu Button */}
           <div className="md:hidden flex items-center">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} type="button">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+            >
               <svg
                 className="h-6 w-6 fill-current text-gray-600"
                 viewBox="0 0 24 24"
@@ -98,16 +114,29 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {menuOptions.map((option) => (
-              <Link
-                key={option.name}
-                to={option.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
-              >
-                {option.name}
-              </Link>
-            ))}
+            {menuOptions.map((option) =>
+              option.path.startsWith("#") ? (
+                <button
+                  key={option.name}
+                  onClick={() => {
+                    handleHashOptionClick(option);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
+                >
+                  {option.name}
+                </button>
+              ) : (
+                <Link
+                  key={option.name}
+                  to={option.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
+                >
+                  {option.name}
+                </Link>
+              )
+            )}
           </div>
           <div className="px-4 pb-3">
             <Link

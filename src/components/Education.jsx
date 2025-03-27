@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, forwardRef } from 'react';
 import { FaGraduationCap } from 'react-icons/fa';
 
 const educationData = [
@@ -10,7 +10,7 @@ const educationData = [
   },
   {
     title: 'Higher Secondary Education',
-    institution: 'Hellens School , Sitamarhi',
+    institution: 'Hellens School, Sitamarhi',
     period: '2021-2023 ( 88% )',
     description: 'Studied science with a major emphasis on Mathematics and Physics.'
   },
@@ -22,7 +22,7 @@ const educationData = [
   },
 ];
 
-const EducationSection = () => {
+const EducationSection = forwardRef((props, ref) => {
   const trainRef = useRef(null);
   const timelineRef = useRef(null);
 
@@ -48,12 +48,17 @@ const EducationSection = () => {
   }, []);
 
   return (
-    // Remove negative margin and ensure the section is below the fixed navbar by default
-    <section id="education" className="relative z-0 -mt-1">
-        <h1 className="text-3xl md:text-4xl font-bold text-white text-center bg-[#0284C7] pb-8 flex items-center justify-center gap-2">
+    // Attach the forwarded ref and add an id for scrolling, plus a scroll margin so it isn’t hidden behind the navbar.
+    <section
+      ref={ref}
+      id="education"
+      className="relative z-0 -mt-1"
+      style={{ scrollMarginTop: '80px' }}
+    >
+      <h1 className="text-3xl md:text-4xl font-bold text-white text-center bg-[#0284C7] pb-8 flex items-center justify-center gap-2">
         <FaGraduationCap className="text-white" />
-            Education
-          </h1>
+        Education
+      </h1>
 
       {/* Timeline Container */}
       <div ref={timelineRef} className="relative container mx-auto px-4 bg-[#0284C7]">
@@ -138,6 +143,6 @@ const EducationSection = () => {
       `}</style>
     </section>
   );
-};
+});
 
 export default EducationSection;

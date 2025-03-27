@@ -2,47 +2,100 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Groq from "groq-sdk";
 
-// Define your personal context message
+// System context (personal bio) to prime the conversation
 const systemContext = {
   role: "system",
   content: `
-You are chatting with **Gaurav**, a Software Engineer currently pursuing a BTech in Computer Science at **IIT Bhilai**.
-He loves turning ideas into scalable digital solutions and is passionate about exploring new technologies.
-He has experience in web development, programming, and building creative digital experiences.
-When users ask questions about him, provide detailed and friendly responses.
+You are chatting with Gaurav, a Software Engineer pursuing a BTech in Computer Science at IIT Bhilai.
+He loves turning ideas into scalable digital solutions and exploring new technologies.
+Answer any questions about him in a friendly and detailed manner. ( important )
+
+Details about Gaurav :-
+Full Name - Gaurav Kumar 
+Address - From Sitamarhi , Bihar
+Education :-
+BTech in CSE from IIT Bhilai ( 2023 - 2027 ) , currently in 2nd year , 4th sem.
+
+Higher Secondary Eduaction :- Hellens School Sitamarhi , 88% in 12th
+Prepared for JEE from Allen Kota
+
+Secondary education :- Mission Boarding School , Sitamarhi ( Hometown )
+
+
+Hobbies :- Playing Cricket and coding
+
+
+Skills :- 
+ category: "Programming Languages",
+    skills: ["C", "C++", "Python", "JavaScript", "TypeScript", "Shell Scripting"],
+    category: "Frameworks and Languages",
+    icon: <FaCogs className="text-2xl text-[#0284C7]" />,
+    skills: ["React Js", "Node js", "Express Js", "Next js", "Tailwind CSS", "React Native", "HTML", "CSS"],
+    category: "Data Science",
+   skills: ["Pandas", "NumPy", "scikit-learn", "Statistics", "Visualization", "pandas-profiling", "Matplotlib"],
+    category: "Clouds and DevOps",
+    skills: ["AWS", "Git", "GitHub", "Docker", "Deployment"],
+    category: "Machine Learning",
+      "Linear Regression", "Logistic Regression", "KNN", "PCA", "Gradient Descent",
+      "Bagging", "Boosting", "Random Forest", "Decision Trees", "Softmax Regression", Voting Ensemble.
+    category: "Libraries and Tools",
+    openAI, Groq AI, LaTeX, Bcrypt, JWT, MUI, npm , nodemon
+
+
+    Achievements :- 
+    {
+    title: "Codeforces Specialist ( 1483 Max Rating )",
+    date: "2024 - present , gauravkr54",
+    description: "Secured a rank of 1188 in Codeforces Round 1009 , Div 3.",
+  },
+  {
+    title: "3 Star on CodeChef ( 1748 Max Rating )",
+    date: "2023 - present , gauravkr54",
+    description: "Giving contests consistently and achieved this milestone.",
+  },
+  {
+    title: "Open Source Contributor",
+    date: "2025 , Gaurav-k-Gupta",
+    description: "Contributed to popular open source project by VIKASA ( C4GT Community ).",
+  },
+  {
+    title: "450+ Problems solved and top 8% on Leetcode",
+    date: "2023 - Present , Codewith_gaurav",
+    description: "From solving POTDs to giving contests, i have solved problems mostly on DP , Graphs and focusing on optimization.",
+  },
+
   `,
 };
 
-// Initialize Groq with your API key (ensure you've set VITE_GROQ_API_KEY in your .env.local)
-// WARNING: Using dangerouslyAllowBrowser exposes your key to the client.
-// For production, consider using a secure backend endpoint.
+// Initialize Groq with your API key
 const groq = new Groq({
   apiKey: import.meta.env.VITE_GROQ_API_KEY,
-  dangerouslyAllowBrowser: true,
+  dangerouslyAllowBrowser: true, // Use with caution
 });
 
 const Chatbot = () => {
-  // Store conversation history, starting with the system context (not displayed in the UI)
-  const [messages, setMessages] = useState([systemContext]);
+  const [messages, setMessages] = useState([]); // Conversation history
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed) return;
-
-    // Append user's message to conversation
-    const userMessage = { role: "user", content: trimmed };
-    setMessages(prev => [...prev, userMessage]);
+    // Add user's message to the conversation
+    setMessages(prev => [...prev, { role: "user", content: trimmed }]);
     setInput("");
     setLoading(true);
     try {
-      // Send the conversation history (including system context) to the API
+      // Include the system context along with the user's message
       const response = await groq.chat.completions.create({
-        messages: [...messages, userMessage],
+        messages: [
+          systemContext,
+          { role: "user", content: trimmed },
+        ],
         model: "llama-3.3-70b-versatile",
       });
       const botReply = response.choices[0]?.message?.content || "Sorry, I didn't get that.";
+      // Add the bot's reply to the conversation
       setMessages(prev => [...prev, { role: "bot", content: botReply }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: "bot", content: "Error: " + error.message }]);
@@ -51,25 +104,22 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-8 p-6 border rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-4 text-center text-[#0284C7]">Chat with My Assistant</h2>
+    <div className="max-w-3xl mx-auto my-8 p-4 relative">
+      <h2 className="text-2xl font-bold mb-4 text-center text-[#0284C7]">
+        Chat with My Assistant
+      </h2>
       
-      {/* Enlarged Chat Area */}
-      <div className="h-96 overflow-y-auto border p-4 rounded mb-4 bg-gray-50">
-        {/*
-          We display only the messages that are not the system context.
-          The system context is used to prime the model but not shown in the UI.
-        */}
-        {messages.slice(1).map((msg, index) => (
+      {/* Chat Area with extra padding at bottom for the sticky input */}
+      <div className="h-[500px] overflow-y-auto pb-24 p-4 bg-white">
+        {messages.map((msg, index) => (
           <div
             key={index}
             className={`mb-4 flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-xs break-words p-3 rounded-lg shadow 
-                ${msg.role === "user"
-                  ? "bg-[#0284C7] text-white rounded-br-none"
-                  : "bg-gray-200 text-gray-800 rounded-bl-none"}`}
+              className={`max-w-lg break-words p-3 rounded-xl ${
+                msg.role === "user" ? "bg-[#0284C7] text-white" : "bg-gray-100 text-gray-800"
+              }`}
               style={{ whiteSpace: 'pre-wrap' }}
             >
               <ReactMarkdown>{msg.content}</ReactMarkdown>
@@ -78,16 +128,18 @@ const Chatbot = () => {
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="p-3 rounded-lg shadow bg-gray-200 text-gray-800">Loading...</div>
+            <div className="p-3 rounded-xl bg-gray-100 text-gray-800">
+              Loading...
+            </div>
           </div>
         )}
       </div>
       
-      {/* Input area */}
-      <div className="flex">
+      {/* Sticky Input Area */}
+      <div className="sticky bottom-0 left-0 right-0 flex bg-white p-4 border-t border-gray-200">
         <input
           type="text"
-          className="flex-1 border rounded-l-lg p-3 focus:outline-none"
+          className="flex-1 border border-gray-300 rounded-l-xl p-3 focus:outline-none"
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -95,7 +147,7 @@ const Chatbot = () => {
         />
         <button
           onClick={handleSend}
-          className="bg-[#0284C7] hover:bg-[#0369A1] text-white px-6 rounded-r-lg"
+          className="bg-[#0284C7] hover:bg-[#0369A1] text-white px-6 rounded-r-xl"
           disabled={loading}
         >
           Send
