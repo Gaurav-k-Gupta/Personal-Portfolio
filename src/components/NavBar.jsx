@@ -60,6 +60,7 @@ const Navbar = ({ onEducationClick, onSkillsClick , onContactClick , onProjectsC
 
   return (
     <nav className="bg-white fixed w-full z-10">
+      <div className="bg-grey mx-auto p-2 text-black display-flex justify-center">Not Updated!</div>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Left: Logo */}
